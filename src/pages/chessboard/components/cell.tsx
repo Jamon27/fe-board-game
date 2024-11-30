@@ -1,5 +1,5 @@
 import React from 'react';
-// import "./Cell.css";
+import './cell.css';
 
 interface ICellProps {
   id: string;
@@ -12,7 +12,7 @@ function Square(props: ICellProps) {
   const { id, isHighlighted, color, onClick } = props;
   return (
     <div
-      className={`cell ${color} ${isHighlighted ? "highlighted" : ""}`}
+      className={`cell ${color} ${isHighlighted ? 'highlighted' : ''}`}
       onClick={() => onClick(id)}
     >
       {id}
