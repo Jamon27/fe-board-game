@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import ErrorBoundary from './common/errorBoundary';
-import Chessboard from './pages/chessboard/Chessboard';
+import Chessboard from './pages/chessboard/chessboard';
 
 function App() {
   return (
