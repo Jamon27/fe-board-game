@@ -1,54 +1,82 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 
-import './chessboard.css';
-import Cell from './components/cell';
+import ChessService from './services/ChessService';
+import Controls from './components/Controls';
+import Board from './components/Board';
 
-function Chessboard() {
-  const [start, setStart] = useState<string | null>(null);
-  const [end, setEnd] = useState<string | null>(null);
+const Chessboard: React.FC = () => {
+  const [state, setState] = useState({
+    startPosition: null as string | null,
+    endPosition: null as string | null,
+    shortestPath: null as string | null,
+    error: null as string | null,
+    loading: false,
+  });
 
-  const handleCellClick = (cellId: string) => {
-    throw new Error();
+  const chessService = useMemo(() => ChessService.getInstance(), []);
 
-    if (!start) {
-      setStart(cellId);
-    } else if (!end) {
-      setEnd(cellId);
-    } else {
-      setStart(cellId); // Reset positions
-      setEnd(null);
-    }
-  };
+  const handleCellClick = useCallback((cellId: string) => {
+    setState((prevState) => {
+      if (!prevState.startPosition) {
+        return { ...prevState, startPosition: cellId };
+      }
+      if (!prevState.endPosition) {
+        return { ...prevState, endPosition: cellId };
+      }
+      return { ...prevState, startPosition: cellId, endPosition: null };
+    });
+  }, []);
 
-  const createBoard = () => {
-    const board = [];
-    for (let row = 0; row < 8; row++) {
-      for (let col = 0; col < 8; col++) {
-        const cellId = `${String.fromCharCode(97 + col)}${8 - row}`; // e.g., "a8", "b1"
-        const color = (row + col) % 2 === 0 ? 'light' : 'dark';
-
-        board.push(
-          <Cell
-            key={cellId}
-            id={cellId}
-            color={color}
-            isHighlighted={false}
-            onClick={handleCellClick}
-          />,
+  const fetchKnightPath = async () => {
+    if (state.startPosition && state.endPosition) {
+      setState((prevState) => ({ ...prevState, loading: true, error: null }));
+      try {
+        const response = await chessService.getKnightPaths(
+          state.startPosition,
+          state.endPosition,
+          3,
         );
+
+        if (!response.ok) {
+          const errResponse = await response.json();
+          throw new Error(errResponse.message);
+        }
+
+        const result = await response.json();
+        setState((prevState) => ({
+          ...prevState,
+          shortestPath: result?.shortestPaths[0] || null,
+          loading: false,
+        }));
+      } catch (error) {
+        console.log(error);
+        setState((prevState) => ({
+          ...prevState,
+          shortestPath: null,
+          error: (error as Error).message,
+          loading: false,
+        }));
       }
     }
-    return board;
   };
 
   return (
     <div>
-      <h2>Chessboard</h2>
-      <p>Start Position: {start || 'Click to set'}</p>
-      <p>End Position: {end || 'Click to set'}</p>
-      <div className="chessboard">{createBoard()}</div>
+      <Controls
+        startPosition={state.startPosition}
+        endPosition={state.endPosition}
+        shortestPath={state.shortestPath}
+        loading={state.loading}
+        error={state.error}
+        onFetchKnightPath={fetchKnightPath}
+      />
+      <Board
+        startPosition={state.startPosition}
+        endPosition={state.endPosition}
+        onCellClick={handleCellClick}
+      />
     </div>
   );
-}
+};
 
 export default Chessboard;
