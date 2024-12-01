@@ -13,7 +13,10 @@ export default [
 
     // Language options
     languageOptions: {
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.jest,
+      },
       parser: tsParser, // Pass the actual parser object
       parserOptions: {
         ecmaVersion: 'latest',
@@ -46,6 +49,17 @@ export default [
     },
   },
 
+  {
+    files: [
+      '**/__tests__/**/*.{js,mjs,cjs,ts,jsx,tsx}',
+      '**/*.{spec,test}.{js,mjs,cjs,ts,jsx,tsx}',
+    ],
+    languageOptions: {
+      globals: {
+        ...globals.jest, // Add Jest globals for test files
+      },
+    },
+  },
   // Prettier configuration
   prettierConfig,
 ];
