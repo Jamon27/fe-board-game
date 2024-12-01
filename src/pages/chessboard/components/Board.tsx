@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import './Board.css';
-import Cell from './Cell';
+import './board.css';
+import Cell from './cell';
 
 interface BoardProps {
   startPosition: string | null;
@@ -35,7 +35,7 @@ const Board: React.FC<BoardProps> = ({
     return cells;
   }, [startPosition, endPosition, onCellClick]);
 
-  return <div className="chessboard">{board}</div>;
+  return <div className="board">{board}</div>;
 };
 
 export default Board;

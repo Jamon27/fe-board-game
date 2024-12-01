@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Cell from './Cell';
+import Cell from './cell';
 
 describe('Cell Component', () => {
   test('renders correctly with the given props', () => {

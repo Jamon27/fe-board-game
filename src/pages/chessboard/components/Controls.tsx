@@ -1,5 +1,5 @@
 import React from 'react';
-import './Controls.css';
+import './controls.css';
 
 interface ControlsProps {
   startPosition: string | null;

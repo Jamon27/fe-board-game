@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Chessboard from './Chessboard';
-import ChessService from './services/ChessService';
+import Chessboard from './chessboard';
+import ChessService from './services/chessService';
 
 jest.spyOn(ChessService.prototype, 'getKnightPaths').mockImplementation();
 

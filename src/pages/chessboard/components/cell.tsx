@@ -1,6 +1,6 @@
 import React from 'react';
-import './Cell.css';
-import { classNameBuilder } from '../../../common/ClassNameUtils';
+import './cell.css';
+import { classNameBuilder } from '../../../common/classNameUtils';
 
 interface CellProps {
   id: string;

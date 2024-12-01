@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ErrorBoundary from './common/ErrorBoundary';
+import ErrorBoundary from './common/errorBoundary';
 import Chessboard from './pages/chessboard/Chessboard';
 
 function App() {

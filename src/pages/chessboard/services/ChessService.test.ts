@@ -1,4 +1,4 @@
-import ChessService from './ChessService';
+import ChessService from './chessService';
 
 describe('ChessService', () => {
   beforeEach(() => {

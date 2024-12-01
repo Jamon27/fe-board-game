@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import Board from './Board';
+import Board from './board';
 
 describe('Board Component', () => {
   test('renders a chessboard with 64 cells', () => {

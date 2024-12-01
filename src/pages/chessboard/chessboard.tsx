@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useCallback } from 'react';
 
-import ChessService from './services/ChessService';
-import Controls from './components/Controls';
-import Board from './components/Board';
+import ChessService from './services/chessService';
+import Controls from './components/controls';
+import Board from './components/board';
 
 const Chessboard: React.FC = () => {
   const [state, setState] = useState({
