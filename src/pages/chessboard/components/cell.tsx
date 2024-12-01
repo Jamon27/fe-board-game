@@ -1,5 +1,6 @@
 import React from 'react';
 import './Cell.css';
+import { classNameBuilder } from '../../../common/ClassNameUtils';
 
 interface CellProps {
   id: string;
@@ -11,9 +12,16 @@ interface CellProps {
 
 const Cell: React.FC<CellProps> = (props) => {
   const { id, color, isStart, isEnd, onClick } = props;
+  const className = classNameBuilder(
+    'cell',
+    color,
+    isStart && 'start',
+    isEnd && 'end',
+  );
+
   return (
     <div
-      className={`cell ${color} ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''}`}
+      className={className}
       onClick={() => !isStart && onClick && onClick(id)}
     >
       <div className="cell-id">{id}</div>
