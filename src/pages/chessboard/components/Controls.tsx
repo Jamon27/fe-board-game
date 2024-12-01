@@ -18,19 +18,22 @@ const Controls: React.FC<ControlsProps> = ({
   error,
   onFetchKnightPath,
 }) => {
+  const isFetchDisabled =
+    !startPosition || !endPosition || startPosition === endPosition || loading;
+
   return (
     <div className="controls">
       <div className="controls-info">
         <p>
-          <strong>Start Position:</strong>{' '}
+          <strong>Start Position: </strong>
           {startPosition || <span className="placeholder">Click to set</span>}
         </p>
         <p>
-          <strong>End Position:</strong>{' '}
+          <strong>End Position: </strong>
           {endPosition || <span className="placeholder">Click to set</span>}
         </p>
         <p>
-          <strong>Shortest Path:</strong>{' '}
+          <strong>Shortest Path: </strong>
           {shortestPath || <span className="placeholder">Not found</span>}
         </p>
         {error && <p className="error">{error}</p>}
@@ -38,12 +41,7 @@ const Controls: React.FC<ControlsProps> = ({
       <button
         className="fetch-button"
         onClick={onFetchKnightPath}
-        disabled={
-          !startPosition ||
-          !endPosition ||
-          startPosition === endPosition ||
-          loading
-        }
+        disabled={isFetchDisabled}
       >
         {loading ? 'Loading...' : 'Fetch Knight Path'}
       </button>
