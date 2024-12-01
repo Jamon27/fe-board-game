@@ -22,7 +22,6 @@ export default class ChessService {
       chessPieceType: 'knight',
       stepsLimit,
     };
-    console.log('ss');
 
     const result = fetch('http://localhost:3100/api/chess/paths', {
       method: 'POST',
