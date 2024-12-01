@@ -15,9 +15,12 @@ describe('Controls Component', () => {
       />,
     );
 
-    expect(screen.getByText('Start Position: a1')).toBeInTheDocument();
-    expect(screen.getByText('End Position: b2')).toBeInTheDocument();
-    expect(screen.getByText('Shortest Path: a1-b2-c3')).toBeInTheDocument();
+    expect(screen.getByText('Start Position:')).toBeInTheDocument();
+    expect(screen.getByText('a1')).toBeInTheDocument();
+    expect(screen.getByText('End Position:')).toBeInTheDocument();
+    expect(screen.getByText('b2')).toBeInTheDocument();
+    expect(screen.getByText('Shortest Path:')).toBeInTheDocument();
+    expect(screen.getByText('a1-b2-c3')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /fetch knight path/i }),
     ).toBeEnabled();
