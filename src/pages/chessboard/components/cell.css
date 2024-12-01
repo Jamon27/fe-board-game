@@ -1,5 +1,6 @@
 /* Cell.css */
 .cell {
+  position: relative; /* Position container for the inner elements */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,6 +8,7 @@
   cursor: pointer;
   width: 100%;
   height: 100%;
+  transition: background-color 0.2s;
 }
 
 .cell.light {
@@ -17,10 +19,22 @@
   background-color: #b58863;
 }
 
-.cell.highlighted {
-  background-color: yellow;
+.cell.start {
+  background-color: rgb(52, 255, 255);
+  font-size: 50px;
+  cursor: not-allowed;
 }
 
-.red {
-  background-color: red;
+.cell.end {
+  background-color: rgb(52, 147, 255);
+  font-size: 50px;
+}
+
+.cell-id {
+  position: absolute; /* Top-left positioning */
+  top: 2px;
+  left: 4px;
+  font-size: 10px;
+  color: #333; /* A subtle color for the ID */
+  pointer-events: none; /* Prevent interaction with the ID */
 }

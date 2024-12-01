@@ -1,23 +1,26 @@
 import React from 'react';
-import './cell.css';
+import './Cell.css';
 
-interface ICellProps {
+interface CellProps {
   id: string;
-  isHighlighted: boolean;
   color: string;
-  onClick: (id: string) => void;
+  isStart?: boolean;
+  isEnd?: boolean;
+  onClick?: (id: string) => void;
 }
 
-function Square(props: ICellProps) {
-  const { id, isHighlighted, color, onClick } = props;
+const Cell: React.FC<CellProps> = (props) => {
+  const { id, color, isStart, isEnd, onClick } = props;
   return (
     <div
-      className={`cell ${color} ${isHighlighted ? 'highlighted' : ''}`}
-      onClick={() => onClick(id)}
+      className={`cell ${color} ${isStart ? 'start' : ''} ${isEnd ? 'end' : ''}`}
+      onClick={() => !isStart && onClick && onClick(id)}
     >
-      {id}
+      <div className="cell-id">{id}</div>
+      <div></div>
+      {isStart ? '♘' : isEnd ? '♘' : ''}
     </div>
   );
-}
+};
 
-export default Square;
+export default React.memo(Cell);
