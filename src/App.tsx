@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import Chessboard from './pages/chessboard/chessboard';
 import ErrorBoundary from './common/ErrorBoundary';
+import Chessboard from './pages/chessboard/Chessboard';
 
 function App() {
   return (
-    <div>
+    <div className="App-wrapper">
       <h1>Knight Path Finder</h1>
       <ErrorBoundary>
         <Chessboard />
